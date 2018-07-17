@@ -168,9 +168,9 @@ include $(BUILD_SYSTEM)/node_fns.mk
 include $(BUILD_SYSTEM)/product.mk
 include $(BUILD_SYSTEM)/device.mk
 
-# A COS build needs only the COS product makefiles.
-ifneq ($(COS_BUILD),)
-  all_product_configs := $(shell find device -path "*/$(COS_BUILD)/cos.mk")
+# A SIMPLIX build needs only the COS product makefiles.
+ifneq ($(SIMPLIX_BUILD),)
+  all_product_configs := $(shell find device -path "*/$(SIMPLIX_BUILD)/simplix.mk")
 else
   ifneq ($(strip $(TARGET_BUILD_APPS)),)
   # An unbundled app build needs only the core product makefiles.
@@ -181,9 +181,9 @@ else
   # files in the tree.
   all_product_configs := $(get-all-product-makefiles)
   endif # TARGET_BUILD_APPS
-endif # COS_BUILD
+endif # SIMPLIX_BUILD
 
-ifeq ($(COS_BUILD),)
+ifeq ($(SIMPLIX_BUILD),)
 all_named_products :=
 
 # Find the product config makefile for the current product.

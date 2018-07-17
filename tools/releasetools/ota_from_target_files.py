@@ -516,22 +516,17 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     system_progress -= 0.1
 
   script.Print(" ")
-  script.Print("================================")
-  script.Print("                                ")
-  script.Print("   $$$$$$\   $$$$$$\   $$$$$$\  ")
-  script.Print("  $$  __$$\ $$  __$$\ $$  __$$\ ")
-  script.Print("  $$ /  \__|$$ /  $$ |$$ /  \__|")
-  script.Print("  $$ |      $$ |  $$ |\$$$$$$\  ")
-  script.Print("  $$ |      $$ |  $$ | \____$$\ ")
-  script.Print("  $$ |  $$\ $$ |  $$ |$$\   $$ |")
-  script.Print("  \$$$$$$  | $$$$$$  |\$$$$$$  |")
-  script.Print("   \______/  \______/  \______/ ")
-  script.Print("                                ")
-  script.Print("================================")
-  script.Print("                                ")
-  script.Print("       COSMIC-OS OREO 8.1       ")
-  script.Print("                                ")
-  script.Print("================================")
+  script.Print("         ____  ____         ")
+  script.Print("         \\  \\/   /         ")
+  script.Print("          \\      /          ")
+  script.Print("          /      \\          ")
+  script.Print("         /___/\\___\\         ")
+  script.Print("                /\\          ")
+  script.Print("                \\/          ")        
+  script.Print("							")
+  script.Print("============================")
+  script.Print("         Simplix 8.1        ")
+  script.Print("============================")
   script.Print(" ")
 
   # Place a copy of file_contexts.bin into the OTA package which will be used
@@ -611,7 +606,7 @@ endif;
 
   common.ZipWriteStr(output_zip, "system/build.prop",
                      ""+input_zip.read("SYSTEM/build.prop"))
-  common.ZipWriteStr(output_zip, "META-INF/org/cosmicos/releasekey",
+  common.ZipWriteStr(output_zip, "META-INF/org/simplix/releasekey",
                      ""+input_zip.read("META/releasekey.txt"))
 
 def WritePolicyConfig(file_name, output_zip):

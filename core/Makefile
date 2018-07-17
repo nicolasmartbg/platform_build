@@ -277,7 +277,7 @@ endif
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 			TARGET_BUILD_FLAVOR="$(TARGET_BUILD_FLAVOR)" \
 			TARGET_DEVICE="$(TARGET_DEVICE)" \
-			COS_DEVICE="$(TARGET_DEVICE)" \
+			SIMPLIX_DEVICE="$(TARGET_DEVICE)" \
 			PRODUCT_NAME="$(TARGET_PRODUCT)" \
 			PRODUCT_BRAND="$(PRODUCT_BRAND)" \
 			PRODUCT_DEFAULT_LOCALE="$(call get-default-product-locale,$(PRODUCT_LOCALES))" \
@@ -2797,7 +2797,7 @@ endif
 ifeq ($(WITH_GMS),true)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
 else
-ifneq ($(COS_BUILD),)
+ifneq ($(SIMPLIX_BUILD),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 else
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
@@ -2820,28 +2820,17 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
 	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
 	   $(BUILT_TARGET_FILES_PACKAGE) $@
 
-COS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(COS_MOD_VERSION).zip
+SIMPLIX_TARGET_PACKAGE := $(PRODUCT_OUT)/$(SIMPLIX_MOD_VERSION).zip
 
 .PHONY: otapackage bacon
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(COS_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(COS_TARGET_PACKAGE) > $(COS_TARGET_PACKAGE).md5sum
-
-	echo -e ${CL_CYN}" ▄████▄   ▒█████    ██████  ███▄ ▄███▓ ██▓ ▄████▄      ▒█████    ██████  "${CL_RST}
-	echo -e ${CL_CYN}"▒██▀ ▀█  ▒██▒  ██▒▒██    ▒ ▓██▒▀█▀ ██▒▓██▒▒██▀ ▀█     ▒██▒  ██▒▒██    ▒  "${CL_RST}
-	echo -e ${CL_CYN}"▒▓█    ▄ ▒██░  ██▒░ ▓██▄   ▓██    ▓██░▒██▒▒▓█    ▄    ▒██░  ██▒░ ▓██▄    "${CL_RST}
-	echo -e ${CL_CYN}"▒▓▓▄ ▄██▒▒██   ██░  ▒   ██▒▒██    ▒██ ░██░▒▓▓▄ ▄██▒   ▒██   ██░  ▒   ██▒ "${CL_RST}
-	echo -e ${CL_CYN}"▒ ▓███▀ ░░ ████▓▒░▒██████▒▒▒██▒   ░██▒░██░▒ ▓███▀ ░   ░ ████▓▒░▒██████▒▒ "${CL_RST}
-	echo -e ${CL_CYN}"░ ░▒ ▒  ░░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░░ ▒░   ░  ░░▓  ░ ░▒ ▒  ░   ░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░ "${CL_RST}
-	echo -e ${CL_CYN}"  ░  ▒     ░ ▒ ▒░ ░ ░▒  ░ ░░  ░      ░ ▒ ░  ░  ▒        ░ ▒ ▒░ ░ ░▒  ░ ░ "${CL_RST}
-	echo -e ${CL_CYN}"░        ░ ░ ░ ▒  ░  ░  ░  ░      ░    ▒ ░░           ░ ░ ░ ▒  ░  ░  ░   "${CL_RST}
-	echo -e ${CL_CYN}"░ ░          ░ ░        ░         ░    ░  ░ ░             ░ ░        ░   "${CL_RST}
-	echo -e ${CL_CYN}"░                                         ░                              "${CL_RST}
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(SIMPLIX_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(SIMPLIX_TARGET_PACKAGE) > $(SIMPLIX_TARGET_PACKAGE).md5sum
 	@echo -e ${CL_BLD}${CL_CYN}"===============================-Package complete-==============================="${CL_RST}
-	@echo -e ${CL_BLD}${CL_YLW}"Zip: "${CL_YLW} $(COS_TARGET_PACKAGE)${CL_RST}
-	@echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(COS_TARGET_PACKAGE).md5sum | awk '{print $$1}' `"${CL_RST}
-	@echo -e ${CL_BLD}${CL_YLW}"Size:"${CL_YLW}" `du -sh $(COS_TARGET_PACKAGE) | awk '{print $$1}' `"${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"Zip: "${CL_YLW} $(SIMPLIX_TARGET_PACKAGE)${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(SIMPLIX_TARGET_PACKAGE).md5sum | awk '{print $$1}' `"${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"Size:"${CL_YLW}" `du -sh $(SIMPLIX_TARGET_PACKAGE) | awk '{print $$1}' `"${CL_RST}
 	@echo -e ${CL_BLD}${CL_CYN}"================================================================================"${CL_RST}
 
 endif    # build_ota_package

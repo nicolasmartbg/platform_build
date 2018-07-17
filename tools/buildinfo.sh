@@ -62,6 +62,6 @@ if [ "$TARGET_UNIFIED_DEVICE" == "" ] ; then
 fi
 echo "ro.build.characteristics=$TARGET_AAPT_CHARACTERISTICS"
 
-echo "ro.cos.device=$COS_DEVICE"
+echo "ro.simplix.device=$SIMPLIX_DEVICE"
 
 echo "# end build properties"

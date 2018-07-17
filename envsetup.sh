@@ -23,7 +23,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 
 EOF
 
-    __print_cosmic_functions_help
+    __print_simplix_functions_help
 
 cat <<EOF
 
@@ -135,13 +135,13 @@ function check_product()
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
         return
     fi
-    if (echo -n $1 | grep -q -e "^cos_") ; then
-        COS_BUILD=$(echo -n $1 | sed -e 's/^cos_//g')
-        export BUILD_NUMBER=$( (date +%s%N ; echo $COS_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
+    if (echo -n $1 | grep -q -e "^simplix_") ; then
+        SIMPLIX_BUILD=$(echo -n $1 | sed -e 's/^simplix_//g')
+        export BUILD_NUMBER=$( (date +%s%N ; echo $SIMPLIX_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
     else
-        COS_BUILD=
+        SIMPLIX_BUILD=
     fi
-    export COS_BUILD
+    export SIMPLIX_BUILD
 
         TARGET_PRODUCT=$1 \
         TARGET_BUILD_VARIANT= \
@@ -555,23 +555,26 @@ function add_lunch_combo()
 # add_lunch_combo aosp_x86-eng
 # add_lunch_combo aosp_x86_64-eng
 
-function print_cosmic_ascii()
+function print_simplix_ascii()
 {
 echo
-echo -e '\033[0;31m $$$$$$\                                    $$\           '
-echo -e '\033[1;31m$$  __$$\                                   \__|          '
-echo -e '\033[0;33m$$ /  \__| $$$$$$\   $$$$$$$\ $$$$$$\$$$$\  $$\  $$$$$$$\ '
-echo -e '\033[0;32m$$ |      $$  __$$\ $$  _____|$$  _$$  _$$\ $$ |$$  _____|'
-echo -e '\033[0;34m$$ |      $$ /  $$ |\$$$$$$\  $$ / $$ / $$ |$$ |$$ /      '
-echo -e '\033[1;35m$$ |  $$\ $$ |  $$ | \____$$\ $$ | $$ | $$ |$$ |$$ |      '
-echo -e '\033[0;35m\$$$$$$  |\$$$$$$  |$$$$$$$  |$$ | $$ | $$ |$$ |\$$$$$$$\ '
-echo -e '\033[0m \______/  \______/ \_______/ \__| \__| \__|\__| \_______|'
+echo -e "${CLR_BLD_BLU}         ____  ____         ${CLR_RST}"
+echo -e "${CLR_BLD_BLU}         \   \/   /         ${CLR_RST}"
+echo -e "${CLR_BLD_BLU}          \      /          ${CLR_RST}"
+echo -e "${CLR_BLD_BLU}          /      \          ${CLR_RST}"
+echo -e "${CLR_BLD_BLU}         /___/\___\         ${CLR_RST}"
+echo -e "${CLR_BLD_BLU}                /\          ${CLR_RST}"
+echo -e "${CLR_BLD_BLU}                \/          ${CLR_RST}"        
+echo -e ""
+echo -e "${CLR_BLD_BLU}============================${CLR_RST}"
+echo -e "${CLR_BLD_BLU}         Simplix 8.1        ${CLR_RST}"
+echo -e "${CLR_BLD_BLU}============================${CLR_RST}"
 echo
 }
 function print_lunch_menu()
 {
     local uname=$(uname)
-    print_cosmic_ascii
+    print_simplix_ascii
     echo
     echo "You're building on" $uname
     echo
@@ -670,8 +673,8 @@ function lunch()
       unset TARGET_PLATFORM_VERSION
     fi
     export TARGET_BUILD_TYPE=release
-    export COS_VERSION=$(get_build_var COS_VERSION)
-    export COS_RELEASE=$(get_build_var COS_RELEASE)
+    export SIMPLIX_VERSION=$(get_build_var SIMPLIX_VERSION)
+    export SIMPLIX_RELEASE=$(get_build_var SIMPLIX_RELEASE)
 
     echo
 
